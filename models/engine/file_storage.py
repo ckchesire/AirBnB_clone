@@ -3,6 +3,7 @@
 """
 import json
 from models.base_model import BaseModel
+from models.user import User
 import datetime as dt
 
 
@@ -35,7 +36,7 @@ class FileStorage:
         """
         try:
             current_data = {}
-            with open(self.__file_path, 'r') as file:
+            with open(self.__file_path, 'r', encoding='utf-8') as file:
                 current_data = json.load(file)
         except FileNotFoundError:
             pass

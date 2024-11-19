@@ -19,6 +19,10 @@ class BaseModel:
                 created_at(datetime): date when instance is created
                 updated_at(datetime): date when instance is modified
         """
+        self.id = str(uuid.uuid4())
+        self.created_at = dt.now()
+        self.updated_at = self.created_at
+
         if kwargs:
             for key, value in kwargs.items():
                 if key != '__class__':
@@ -29,11 +33,7 @@ class BaseModel:
                                 )
                     else:
                         setattr(self, key, value)
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = dt.now()
-            self.updated_at = self.created_at
-            models.storage.new(self)
+        models.storage.new(self)
 
     def __str__(self):
         """Method used to display output in a human readable string
