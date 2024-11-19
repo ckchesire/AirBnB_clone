@@ -4,6 +4,13 @@
 import cmd
 import shlex
 from models.base_model import BaseModel
+from models.user import User
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models import storage
 
 
@@ -11,11 +18,20 @@ class HBNBCommand(cmd.Cmd):
     """Command line interpreter methods
     """
     prompt = '(hbnb) '
-    valid_classes = ["BaseModel"]
+    valid_classes = [
+            "BaseModel",
+            "User",
+            "State",
+            "City",
+            "Amenity",
+            "Place",
+            "Review"
+            ]
 
     def do_quit(self, line):
         """Quit command to exit the program
         """
+        print("")
         return True
 
     def do_create(self, line):
@@ -29,8 +45,8 @@ class HBNBCommand(cmd.Cmd):
         elif inputs[0] not in self.valid_classes:
             print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
-            new_instance.save()
+            new_instance = eval(f"{inputs[0]}()")
+            storage.save()
             print(new_instance.id)
 
     def do_EOF(self, line):
