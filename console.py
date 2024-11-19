@@ -34,6 +34,16 @@ class HBNBCommand(cmd.Cmd):
         print("")
         return True
 
+    def help_quit(self):
+        """Display message for quit command
+        """
+        print("Quit command to exit the program")
+
+    def emptyline(self):
+        """Method to overwite the emptyline function
+        """
+        return False
+
     def do_create(self, line):
         """Used to create a new instance of the BaseModel and save it to a
             Json file.

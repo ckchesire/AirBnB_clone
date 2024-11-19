@@ -4,7 +4,6 @@
 import uuid
 from datetime import datetime as dt
 import models
-import datetime
 
 
 class BaseModel:
